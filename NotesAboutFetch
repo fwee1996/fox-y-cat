@@ -1,0 +1,52 @@
+Fetch you can get data from outside source
+publicapis.io:
+-RandomFox
+-Shibe.Online
+
+The Fetch "http request"
+
+fetch("https://indoatlantis.com/rest_api/last_transaction")
+
+The Conversion
+.then(response => response.json())
+
+The first then() function waits until the response is received and converts the string:
+"{"odr_id": "27", "odr_usr_id": "4", "odr_status": "Ordered"}"
+
+into a JavaScript object:
+{
+    "odr_id": "27",
+    "odr_usr_id": "4",
+    "odr_status": "Ordered"
+}
+
+
+The Action
+The second then() is automatically invoked by JavaScript once the conversion process is complete. The converted data is automatically passed as an argument when it is invoked.
+
+    .then(
+        (convertedData) => {
+            /*
+                Here, and only here, is where you can do something
+                with the data that you requested.
+            */
+        }
+    )
+
+
+
+
+
+
+Alt: define the action function separately, and pass the reference to the second then().
+
+const handleConvertedData = (convertedData) => {
+    /*
+        Here, and only here, is where you can do something
+        with the data that you requested.
+    */
+}
+
+fetch("https://indoatlantis.com/rest_api/last_transaction")
+    .then(response => response.json())
+    .then(handleConvertedData)
